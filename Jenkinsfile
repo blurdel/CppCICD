@@ -5,12 +5,13 @@ pipeline {
 
         stage('Init') {
             steps {
-                echo 'Stage: '
+                echo 'Stage: Init'
             }
         }
         stage('Build') {
             steps {
                 echo 'Stage: Build'
+                sh 'make'
             }
         }
         stage('Test') {

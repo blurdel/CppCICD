@@ -40,3 +40,4 @@ Debug/
 *.app
 
 # End of https://www.toptal.com/developers/gitignore/api/c++
+/Release/
