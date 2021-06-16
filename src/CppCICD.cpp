@@ -20,24 +20,17 @@ void worker1(string name, int num)
 int worker2(void* pArgs)
 {
 	if (pArgs == nullptr) {
-		return 0;
+		throw std::runtime_error{ "Error: pArgs == null!" };
 	}
 
 	ARGS *args = (ARGS*) pArgs;
-	int count = args->num;
 
-	try {
-
-		for (int i = 0; i < count; ++i) {
-			this_thread::sleep_for(chrono::milliseconds(500));
-			cout /* << this_thread::get_id() << " "*/ << args->name << " count: " << i << endl;
-		}
-
+	int cnt;
+	for (cnt = 0; cnt < args->num; ++cnt) {
+		this_thread::sleep_for(chrono::milliseconds(500));
+		cout /* << this_thread::get_id() << " "*/ << args->name << " count: " << cnt << endl;
 	}
-	catch (std::exception& e) {
-		cout << "Caught exception: " << e.what() << endl;
-	}
-	return count;
+	return cnt;
 }
 
 
@@ -47,6 +40,13 @@ int main()
 
 	ARGS args {"worker1", 10};
 
-	auto fut1 = std::async(worker2, &args);
-	cout << fut1.get() << endl;
+	try {
+
+		auto fut1 = std::async(worker2, &args);
+		cout << fut1.get() << endl;
+
+	}
+	catch (const std::exception& e) {
+		cout << "Exception: " << e.what() << endl;
+	}
 }
