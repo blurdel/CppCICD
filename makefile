@@ -1,5 +1,5 @@
 CXX = g++
-CFLAGS = -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP
+CFLAGS = -std=c++11 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP 
 LFLAGS = -lpthread
 SOURCES = ./src/CppCICD.cpp
 OBJS = $(SOURCES:.cpp=.o)
