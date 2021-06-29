@@ -19,7 +19,7 @@ pipeline {
                 sh 'ssh -V'
                 sh 'java -version'
                 sh 'mvn --version'
-                sh 'g++ --version'
+                // sh 'g++ --version'
             }
         }
         stage('Build') {
