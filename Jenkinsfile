@@ -24,13 +24,17 @@ pipeline {
         }
         stage('Build') {
             when {
-                expression {
-                    env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'main'
+                anyOf {
+                    branch 'master'
+                    branch 'main'
                 }
             }
             steps {
                 echo 'Stage: Build'
-                sh 'make'
+                sh """
+                make clean-all
+                make
+                """
             }
         }
         stage('Test') {
