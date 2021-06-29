@@ -30,14 +30,14 @@ pipeline {
             }
             steps {
                 echo 'Stage: Build'
-                // sh 'make'
+                sh 'make'
             }
         }
         stage('Test') {
             steps {
                 echo 'Stage: Test'
                 echo 'Triggering tm'
-                build(job: '/tm/master', wait: false)
+                build(job: '/tm/master', wait: true)
             }
         }
         stage('Cleanup') {
