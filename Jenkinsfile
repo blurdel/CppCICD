@@ -3,23 +3,25 @@ pipeline {
 
     options {
         timestamps() // Add timestamps to logging
-        // Abort this pipleine if it runs longer than the timeout
+        // Abort pipleine if it runs too long
         timeout(time: 2, unit: 'HOURS') 
     }
-
-    tools {
-        maven 'mvn'
-    }
-
+    
+    parameters {
+		booleanParam(name: 'RunTestManager', defaultValue: true, description: 'Run all Test Manager tests?')
+	}
+    
     stages {
 
         stage('Init') {
             steps {
                 echo 'Stage: Init'
-                sh 'ssh -V'
-                sh 'java -version'
-                sh 'mvn --version'
-                // sh 'g++ --version'
+                sh """
+                ssh -V
+                java -version
+                mvn --version
+                g++ --version
+                """
             }
         }
         stage('Build') {
@@ -38,6 +40,12 @@ pipeline {
             }
         }
         stage('Test') {
+            when {
+                expression {
+					// BRANCH_NAME == 'master'
+					params.RunTestManager == true
+				}
+            }
             steps {
                 echo 'Stage: Test'
                 echo 'Triggering tm'
