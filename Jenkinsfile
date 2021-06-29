@@ -36,6 +36,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Stage: Test'
+                build(job: '/tm/master', wait: false)
             }
         }
         stage('Cleanup') {
