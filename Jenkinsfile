@@ -3,12 +3,14 @@ pipeline {
 
     options {
         timestamps() // Add timestamps to logging
-        // Abort pipleine if it runs too long
-        timeout(time: 2, unit: 'HOURS') 
+        timeout(time: 2, unit: 'HOURS') // Abort pipleine if it runs too long
+	
+	buildDiscarder(logRotator(numToKeepStr: '8', artifactNumToKeepStr: '8'))
+	// disableConcurrentBuilds()
     }
-    
-    parameters {
-		booleanParam(name: 'RunTestManager', defaultValue: true, description: 'Run all Test Manager tests?')
+
+	parameters {
+	booleanParam(name: 'RunTestManager', defaultValue: true, description: 'Run all Test Manager tests?')
 	}
     
     stages {
