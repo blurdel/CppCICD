@@ -36,6 +36,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Stage: Test'
+                echo 'Triggering tm'
                 build(job: '/tm/master', wait: false)
             }
         }
