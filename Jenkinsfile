@@ -5,19 +5,20 @@ pipeline {
         timestamps() // Add timestamps to logging
         timeout(time: 2, unit: 'HOURS') // Abort pipleine if it runs too long
 	
-	buildDiscarder(logRotator(numToKeepStr: '8', artifactNumToKeepStr: '8'))
-	// disableConcurrentBuilds()
+        buildDiscarder(logRotator(numToKeepStr: '8', artifactNumToKeepStr: '8'))
+        // disableConcurrentBuilds()
     }
 
-	parameters {
-	booleanParam(name: 'RunTestManager', defaultValue: true, description: 'Run all Test Manager tests?')
-	}
+    parameters {
+        booleanParam(name: 'RunTestManager', defaultValue: true, description: 'Run all Test Manager tests?')
+    }
     
     stages {
 
         stage('Init') {
             steps {
                 echo 'Stage: Init'
+                echo "branch=${env.BRANCH_NAME}"
                 sh """
                 ssh -V
                 # java -version
@@ -44,9 +45,9 @@ pipeline {
         stage('Test') {
             when {
                 expression {
-					// BRANCH_NAME == 'master'
-					params.RunTestManager == true
-				}
+                    // BRANCH_NAME == 'master'
+                    params.RunTestManager == true
+                }
             }
             steps {
                 echo 'Stage: Test'
