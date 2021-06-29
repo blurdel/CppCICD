@@ -47,12 +47,16 @@ pipeline {
         stage('Cleanup') {
             steps {
                 echo 'Stage: Cleanup'
-                deleteDir()
+                //deleteDir()
             }
         }
 
     }
     post {
+        always {
+            echo "post/always"
+            deleteDir() // clean workspace
+        }
         success {
             echo "post/success"
         }
