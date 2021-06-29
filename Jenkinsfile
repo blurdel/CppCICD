@@ -18,8 +18,8 @@ pipeline {
                 echo 'Stage: Init'
                 sh """
                 ssh -V
-                java -version
-                mvn --version
+                # java -version
+                # mvn --version
                 g++ --version
                 """
             }
@@ -34,7 +34,7 @@ pipeline {
             steps {
                 echo 'Stage: Build'
                 sh """
-                make clean-all
+                make clean-all || true
                 make
                 """
             }
