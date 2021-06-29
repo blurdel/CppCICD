@@ -18,7 +18,7 @@ pipeline {
         stage('Init') {
             steps {
                 echo 'Stage: Init'
-                echo "branch=${env.BRANCH_NAME}"
+                echo "branch=${env.BRANCH_NAME}, RunTestManager=${params.RunTestManager}"
                 sh """
                 ssh -V
                 # java -version
@@ -42,12 +42,15 @@ pipeline {
                 """
             }
         }
-        stage('Test') {
+        stage('Test Manager') {
             when {
                 expression {
                     // BRANCH_NAME == 'master'
                     params.RunTestManager == true
                 }
+            }
+            options {
+                timeout(time: 1, unit: 'MINUTES')
             }
             steps {
                 echo 'Stage: Test'
