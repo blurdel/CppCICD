@@ -30,7 +30,7 @@ pipeline {
             }
             steps {
                 echo 'Stage: Build'
-                sh 'make'
+                // sh 'make'
             }
         }
         stage('Test') {
