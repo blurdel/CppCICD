@@ -89,6 +89,7 @@ pipeline {
         always {
             echo "post/always"
             deleteDir() // clean workspace
+			cleanWs()
         }
         success {
             echo "post/success"
