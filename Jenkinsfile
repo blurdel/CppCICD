@@ -24,7 +24,7 @@ pipeline {
                 # java -version
                 # mvn --version
                 g++ --version
-		sleep 30  # temp: test build:wait when called from another job
+		# sleep 30  # temp: test build:wait when called from another job
                 """
             }
         }
