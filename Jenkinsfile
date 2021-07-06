@@ -20,7 +20,7 @@ pipeline {
                 echo 'Stage: Init'
                 echo "branch=${env.BRANCH_NAME}, RunTestManager=${params.RunTestManager}"
                 sh """
-                ssh -V
+                # ssh -V
                 # java -version
                 # mvn --version
                 g++ --version
