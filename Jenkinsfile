@@ -43,8 +43,8 @@ pipeline {
             }
         }
         stage('xxx') {
-            echo 'Stage: xxx'
             steps {
+            echo 'Stage: xxx'
             timeout(30) {
                 waitUntil {
                     resp = sh("sleep 10", returnStatus: true)
