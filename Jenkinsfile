@@ -42,13 +42,14 @@ pipeline {
                 """
             }
         }
+        /*
         stage('xxx') {
             steps {
             echo 'Stage: xxx'
                 script {
                     timeout(30) {
                         waitUntil {
-                            resp = sh("sleep 10", returnStatus: true)
+                            resp = sh "sleep 10", returnStatus: true
                         }
                         return (resp == 0)
                     }
@@ -58,6 +59,7 @@ pipeline {
                 }
             }
         }
+        */
         stage('Test Manager') {
             when {
                 expression {
@@ -71,7 +73,7 @@ pipeline {
             steps {
                 echo 'Stage: Test'
                 echo 'Triggering tm'
-                build(job: '/tm/master', wait: true)
+                build(job: '/tm/master', propagate: true, wait: false)
             }
         }
         stage('Cleanup') {
