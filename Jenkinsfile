@@ -44,14 +44,16 @@ pipeline {
         }
         stage('xxx') {
             echo 'Stage: xxx'
+            steps {
             timeout(30) {
                 waitUntil {
-                    resp = sh(sleep 10, returnStatus: true)
+                    resp = sh("sleep 10", returnStatus: true)
                 }
                 return (resp == 0)
             }
             if (resp != 0) {
                 build.result = 'ERROR'
+            }
             }
         }
         stage('Test Manager') {
