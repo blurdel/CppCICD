@@ -73,7 +73,7 @@ pipeline {
             steps {
                 echo 'Stage: Test'
                 echo 'Triggering tm'
-                build(job: '/tm/master', propagate: true, wait: false)
+                build(job: '/tm/master', propagate: true, wait: true)
             }
         }
         stage('Cleanup') {
