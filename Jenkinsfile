@@ -24,6 +24,7 @@ pipeline {
                 # java -version
                 # mvn --version
                 g++ --version
+		sleep 30
                 """
             }
         }
