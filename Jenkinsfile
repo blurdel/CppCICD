@@ -49,9 +49,9 @@ pipeline {
                     params.RunTestManager == true
                 }
             }
-            options {
-                timeout(time: 1, unit: 'MINUTES')
-            }
+            //options {
+            //    timeout(time: 1, unit: 'MINUTES')
+            //}
             steps {
                 echo 'Stage: Test'
                 echo 'Triggering tm'
