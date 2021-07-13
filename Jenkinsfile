@@ -3,7 +3,7 @@ pipeline {
 
     options {
         timestamps() // Add timestamps to logging
-        timeout(time: 2, unit: 'HOURS') // Abort pipleine if it runs too long
+        //timeout(time: 2, unit: 'HOURS') // Abort pipleine if it runs too long
 	
         buildDiscarder(logRotator(numToKeepStr: '8', artifactNumToKeepStr: '8'))
         // disableConcurrentBuilds()
@@ -43,24 +43,6 @@ pipeline {
                 """
             }
         }
-        /*
-        stage('xxx') {
-            steps {
-            echo 'Stage: xxx'
-                script {
-                    timeout(30) {
-                        waitUntil {
-                            resp = sh "sleep 10", returnStatus: true
-                        }
-                        return (resp == 0)
-                    }
-                    if (resp != 0) {
-                        build.result = 'ERROR'
-                    }
-                }
-            }
-        }
-        */
         stage('Test Manager') {
             when {
                 expression {
@@ -89,7 +71,6 @@ pipeline {
         always {
             echo "post/always"
             deleteDir() // clean workspace
-			cleanWs()
         }
         success {
             echo "post/success"
