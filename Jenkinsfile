@@ -3,10 +3,10 @@ pipeline {
 
     options {
         timestamps() // Add timestamps to logging
-        //timeout(time: 2, unit: 'HOURS') // Abort pipleine if it runs too long
+        timeout(time: 1, unit: 'HOURS') // Abort pipleine
 	
         buildDiscarder(logRotator(numToKeepStr: '8', artifactNumToKeepStr: '8'))
-        // disableConcurrentBuilds()
+        disableConcurrentBuilds()
     }
 
     parameters {
@@ -24,7 +24,6 @@ pipeline {
                 # java -version
                 # mvn --version
                 g++ --version
-		# sleep 20  # temp: test build:wait when called from another job
                 """
             }
         }
@@ -51,18 +50,17 @@ pipeline {
                 }
             }
             //options {
-            //    timeout(time: 1, unit: 'MINUTES')
+            //    timeout(time: 20, unit: 'MINUTES')
             //}
             steps {
-                echo 'Stage: Test'
-                echo 'Triggering tm'
-                build(job: '/tm/master', propagate: true, wait: true)
+                echo 'Stage: Test Manager'
+                echo 'Triggering TM'
+                build(job: '/TestMgrRunOne/main', propagate: true, wait: true)
             }
         }
         stage('Cleanup') {
             steps {
                 echo 'Stage: Cleanup'
-                //deleteDir()
             }
         }
 
