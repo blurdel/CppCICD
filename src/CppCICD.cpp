@@ -8,7 +8,7 @@ struct ARGS {
 	string name;
 	int num;
 };
-
+/*
 void worker1(string name, int num)
 {
 	for (int i = 0; i < num; ++i) {
@@ -16,7 +16,7 @@ void worker1(string name, int num)
 		cout << name << " count: " << i << endl;
 	}
 }
-
+*/
 int worker2(void* pArgs)
 {
 	if (pArgs == nullptr) {
@@ -38,9 +38,9 @@ int main()
 {
 	cout << "Running ..." << endl;
 
-	ARGS args {"worker1", 10};
-
 	try {
+
+		ARGS args {"worker1", 6};
 
 		auto fut1 = std::async(worker2, &args);
 		cout << fut1.get() << endl;
