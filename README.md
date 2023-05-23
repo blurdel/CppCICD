@@ -1,2 +1,2 @@
 # CppCICD
-Demo project for cpp CI/CD Jenkins pipleine
+Demo Jenkins pipleine for building CPP using a makefile
